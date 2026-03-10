@@ -13,7 +13,7 @@ const { id, command, items } = Astro.props;
 ---
 
 <TerminalSection command={command} anchorId={id} class="mb-14 md:mb-20">
-  <div class="grid gap-6 md:grid-cols-2">
+  <div class="grid gap-6 md:grid-cols-2" data-stagger>
     {items.map((project) => <ProjectCard project={project} />)}
   </div>
 </TerminalSection>

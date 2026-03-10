@@ -18,7 +18,7 @@ const { id, command, title, items } = Astro.props;
     <p class="text-xs font-bold tracking-[0.26em] text-primary uppercase">
       {title}
     </p>
-    <div class="space-y-12">
+    <div class="space-y-12" data-stagger>
       {
         items.map((item, index) => (
           <TimelineItem item={item} isOpen={index === 0} />

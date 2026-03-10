@@ -19,11 +19,14 @@ const { command, logs, firstName, lastName, role, summary, availability } =
 
 <TerminalSection command={command} class="mb-14 md:mb-16">
   <div class="border-l-2 border-white/5 pl-6">
-    <div class="space-y-2 text-sm text-secondary">
+    <div
+      class="motion-parallax space-y-2 text-sm text-secondary"
+      data-scroll-parallax="18"
+    >
       {logs.map((line) => <p>{line}</p>)}
     </div>
 
-    <div class="mt-6 max-w-3xl">
+    <div class="motion-parallax mt-6 max-w-3xl" data-scroll-parallax="36">
       <p class="font-sans text-[11px] tracking-[0.32em] text-primary uppercase">
         Resume / CV
       </p>
@@ -42,10 +45,12 @@ const { command, logs, firstName, lastName, role, summary, availability } =
       </p>
     </div>
 
-    <div class="mt-8 flex flex-wrap gap-3">
+    <div class="mt-8 flex flex-wrap gap-3" data-stagger>
       {
         availability.map((item) => (
-          <StatusPill label={item.label} value={item.value} />
+          <div class="reveal-item" data-stagger-item>
+            <StatusPill label={item.label} value={item.value} />
+          </div>
         ))
       }
     </div>

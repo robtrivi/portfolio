@@ -20,8 +20,9 @@ const { id, command, email, socials } = Astro.props;
 
   <div
     class="mt-6 flex flex-col justify-between gap-8 border-t border-white/10 pt-8 md:flex-row"
+    data-stagger
   >
-    <div>
+    <div class="reveal-item" data-stagger-item>
       <p
         class="mb-2 text-[10px] font-bold tracking-[0.22em] text-secondary uppercase"
       >
@@ -35,7 +36,7 @@ const { id, command, email, socials } = Astro.props;
       </a>
     </div>
 
-    <div class="flex flex-wrap gap-10">
+    <div class="reveal-item flex flex-wrap gap-10" data-stagger-item>
       {socials.map((item) => <ContactLink item={item} />)}
     </div>
   </div>

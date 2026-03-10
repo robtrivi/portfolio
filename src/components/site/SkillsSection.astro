@@ -18,10 +18,10 @@ const { id, command, title, groups } = Astro.props;
       {title}
     </p>
 
-    <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
+    <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-4" data-stagger>
       {
         groups.map((group) => (
-          <article>
+          <article class="reveal-item" data-stagger-item>
             <p class="mb-4 border-b border-primary/30 pb-2 text-[10px] font-bold tracking-[0.24em] text-white uppercase">
               {group.id}_{group.title}
             </p>

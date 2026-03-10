@@ -77,4 +77,27 @@
     opacity: 0;
     transform: translateY(24px);
   }
+
+  .reveal-item {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  .motion-parallax {
+    will-change: transform;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @layer utilities {
+    .reveal,
+    .reveal-item {
+      opacity: 1;
+      transform: none;
+    }
+
+    .motion-parallax {
+      transform: none !important;
+    }
+  }
 }

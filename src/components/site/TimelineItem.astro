@@ -10,7 +10,10 @@ interface Props {
 const { item, isOpen = false } = Astro.props;
 ---
 
-<article class="relative border-l border-white/20 pl-8">
+<article
+  class="reveal-item relative border-l border-white/20 pl-8"
+  data-stagger-item
+>
   <span
     class:list={[
       "absolute top-0 -left-1.25 h-2.5 w-2.5 rounded-full",
