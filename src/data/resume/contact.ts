@@ -3,7 +3,7 @@ import type { SocialLink } from "./types";
 export const contact = {
   id: "contact",
   command: "contact --method=email",
-  email: "info@robtrivi.com",
+  email: "hello@robtrivi.com",
   socials: [
     {
       label: "Source",
