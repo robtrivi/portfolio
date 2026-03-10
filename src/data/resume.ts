@@ -4,7 +4,7 @@ import { footer } from "./resume/footer";
 import { header } from "./resume/header";
 import { hero } from "./resume/hero";
 import { projects } from "./resume/projects";
-import { skills } from "./resume/skills";
+import { skills, approach } from "./resume/skills";
 
 export * from "./resume/types";
 
@@ -17,6 +17,7 @@ export const resume = {
   header,
   hero,
   skills,
+  approach,
   experience,
   projects,
   contact,
