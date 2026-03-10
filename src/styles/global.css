@@ -72,4 +72,9 @@
     content: "> ";
     color: var(--color-primary);
   }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+  }
 }
