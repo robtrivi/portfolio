@@ -4,9 +4,10 @@ import StackTags from "@components/ui/StackTags.astro";
 
 interface Props {
   item: Experience;
+  isOpen?: boolean;
 }
 
-const { item } = Astro.props;
+const { item, isOpen = false } = Astro.props;
 ---
 
 <article class="relative border-l border-white/20 pl-8">
@@ -15,54 +16,76 @@ const { item } = Astro.props;
       "absolute top-0 -left-1.25 h-2.5 w-2.5 rounded-full",
       item.current ? "bg-primary" : "bg-white/40",
     ]}></span>
-  <div class="space-y-3">
-    <div>
-      <p
-        class="text-[10px] font-bold tracking-[0.22em] text-secondary uppercase"
-      >
-        {item.period} // {item.company}
-      </p>
-      <h3 class="mt-2 text-xl font-bold text-white uppercase">{item.role}</h3>
-    </div>
-
-    <p
-      class="max-w-3xl font-sans text-sm leading-relaxed text-secondary md:text-base"
+  <details class="group" open={isOpen}>
+    <summary
+      class="flex cursor-pointer list-none items-start justify-between gap-4 focus:outline-none"
     >
-      {item.summary}
-    </p>
+      <div class="space-y-2">
+        <p
+          class="text-[10px] font-bold tracking-[0.22em] text-secondary uppercase"
+        >
+          {item.period} // {item.company}
+        </p>
+        <h3 class="mt-2 text-xl font-bold text-white uppercase">{item.role}</h3>
+      </div>
+      <span
+        class="mt-1 text-primary transition-transform duration-300 group-open:rotate-180"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"></path></svg
+        >
+      </span>
+    </summary>
 
-    <StackTags items={item.stack} compact />
+    <div class="mt-4 space-y-4">
+      <p
+        class="max-w-3xl font-sans text-sm leading-relaxed text-secondary md:text-base"
+      >
+        {item.summary}
+      </p>
 
-    {
-      item.subItems && (
-        <div class="mt-6 space-y-6 border-l border-white/5 pl-4 md:pl-6">
-          {item.subItems.map((sub) => (
-            <div class="relative">
-              <div class="absolute top-1.5 -left-4.25 h-px w-3 bg-white/20 md:-left-6.25 md:w-5" />
-              <div class="space-y-2">
-                <div class="flex flex-wrap items-baseline gap-x-2">
-                  <h4 class="text-sm font-bold tracking-wider text-primary uppercase">
-                    ↳ {sub.client}
-                  </h4>
-                  <span class="text-white/40">—</span>
-                  <span class="text-[11px] font-bold tracking-widest text-secondary uppercase">
-                    {sub.title}
-                  </span>
-                  {sub.role && (
-                    <span class="text-[10px] font-medium text-secondary/50 italic">
-                      ({sub.role})
+      <StackTags items={item.stack} compact />
+
+      {
+        item.subItems && (
+          <div class="mt-6 space-y-6 border-l border-white/5 pl-4 md:pl-6">
+            {item.subItems.map((sub) => (
+              <div class="relative">
+                <div class="absolute top-1.5 -left-4.25 h-px w-3 bg-white/20 md:-left-6.25 md:w-5" />
+                <div class="space-y-2">
+                  <div class="flex flex-wrap items-baseline gap-x-2">
+                    <h4 class="text-sm font-bold tracking-wider text-primary uppercase">
+                      ↳ {sub.client}
+                    </h4>
+                    <span class="text-white/40">—</span>
+                    <span class="text-[11px] font-bold tracking-widest text-secondary uppercase">
+                      {sub.title}
                     </span>
-                  )}
+                    {sub.role && (
+                      <span class="text-[10px] font-medium text-secondary/50 italic">
+                        ({sub.role})
+                      </span>
+                    )}
+                  </div>
+                  <p class="font-sans text-xs leading-relaxed text-secondary/90 md:text-sm">
+                    {sub.summary}
+                  </p>
+                  {sub.stack && <StackTags items={sub.stack} compact />}
                 </div>
-                <p class="font-sans text-xs leading-relaxed text-secondary/90 md:text-sm">
-                  {sub.summary}
-                </p>
-                {sub.stack && <StackTags items={sub.stack} compact />}
               </div>
-            </div>
-          ))}
-        </div>
-      )
-    }
-  </div>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </details>
 </article>
