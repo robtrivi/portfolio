@@ -33,34 +33,36 @@ const { item } = Astro.props;
 
     <StackTags items={item.stack} compact />
 
-    {item.subItems && (
-      <div class="mt-6 space-y-6 border-l border-white/5 pl-4 md:pl-6">
-        {item.subItems.map((sub) => (
-          <div class="relative">
-            <div class="absolute -left-[17px] top-1.5 h-px w-3 bg-white/20 md:-left-[25px] md:w-5"></div>
-            <div class="space-y-2">
-              <div class="flex flex-wrap items-baseline gap-x-2">
-                <h4 class="text-sm font-bold text-primary uppercase tracking-wider">
-                  ↳ {sub.client}
-                </h4>
-                <span class="text-white/40">—</span>
-                <span class="text-[11px] font-bold text-secondary uppercase tracking-widest">
-                  {sub.title}
-                </span>
-                {sub.role && (
-                  <span class="text-[10px] font-medium text-secondary/50 italic">
-                    ({sub.role})
+    {
+      item.subItems && (
+        <div class="mt-6 space-y-6 border-l border-white/5 pl-4 md:pl-6">
+          {item.subItems.map((sub) => (
+            <div class="relative">
+              <div class="absolute top-1.5 -left-4.25 h-px w-3 bg-white/20 md:-left-6.25 md:w-5" />
+              <div class="space-y-2">
+                <div class="flex flex-wrap items-baseline gap-x-2">
+                  <h4 class="text-sm font-bold tracking-wider text-primary uppercase">
+                    ↳ {sub.client}
+                  </h4>
+                  <span class="text-white/40">—</span>
+                  <span class="text-[11px] font-bold tracking-widest text-secondary uppercase">
+                    {sub.title}
                   </span>
-                )}
+                  {sub.role && (
+                    <span class="text-[10px] font-medium text-secondary/50 italic">
+                      ({sub.role})
+                    </span>
+                  )}
+                </div>
+                <p class="font-sans text-xs leading-relaxed text-secondary/90 md:text-sm">
+                  {sub.summary}
+                </p>
+                {sub.stack && <StackTags items={sub.stack} compact />}
               </div>
-              <p class="font-sans text-xs leading-relaxed text-secondary/90 md:text-sm">
-                {sub.summary}
-              </p>
-              {sub.stack && <StackTags items={sub.stack} compact />}
             </div>
-          </div>
-        ))}
-      </div>
-    )}
+          ))}
+        </div>
+      )
+    }
   </div>
 </article>
