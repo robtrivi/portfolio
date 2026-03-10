@@ -1,0 +1,122 @@
+name: Deploy Curriculum
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-curriculum-production
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: validate-build-deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    env:
+      DEPLOY_PATH: ${{ vars.DEPLOY_PATH }}
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check formatting
+        run: pnpm run format:check
+
+      - name: Astro check
+        run: pnpm run check
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Generate release name
+        run: echo "RELEASE=$(date -u +%Y%m%d-%H%M%S)-${GITHUB_SHA::7}" >> "$GITHUB_ENV"
+
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Test SSH connection
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          set -euo pipefail
+          SSH_OPTS="-p $SSH_PORT -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes"
+          ssh $SSH_OPTS "$SSH_USER@$SSH_HOST" "echo 'SSH OK'"
+
+      - name: Create release directory
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          set -euo pipefail
+          SSH_OPTS="-p $SSH_PORT -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes"
+          ssh $SSH_OPTS "$SSH_USER@$SSH_HOST" \
+            "mkdir -p '$DEPLOY_PATH/releases/$RELEASE' '$DEPLOY_PATH/shared'"
+
+      - name: Upload build
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          set -euo pipefail
+          SSH_OPTS="-p $SSH_PORT -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes"
+          rsync -az --delete \
+            -e "ssh $SSH_OPTS" \
+            dist/ \
+            "$SSH_USER@$SSH_HOST:$DEPLOY_PATH/releases/$RELEASE/"
+
+      - name: Activate release and prune old releases
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          set -euo pipefail
+          SSH_OPTS="-p $SSH_PORT -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes"
+
+          ssh $SSH_OPTS "$SSH_USER@$SSH_HOST" \
+            "DEPLOY_PATH='$DEPLOY_PATH' RELEASE='$RELEASE' GITHUB_SHA='$GITHUB_SHA' bash -se" <<'EOF'
+          set -euo pipefail
+
+          printf '%s\n' "$GITHUB_SHA" > "$DEPLOY_PATH/releases/$RELEASE/REVISION"
+          ln -sfn "$DEPLOY_PATH/releases/$RELEASE" "$DEPLOY_PATH/current"
+
+          find "$DEPLOY_PATH/releases" -mindepth 1 -maxdepth 1 -type d | sort | head -n -5 | xargs -r rm -rf
+          EOF
