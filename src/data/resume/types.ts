@@ -9,6 +9,14 @@ export type SkillGroup = {
   items: string[];
 };
 
+export type ExperienceSubItem = {
+  client: string;
+  title: string;
+  role?: string;
+  summary: string;
+  stack?: string[];
+};
+
 export type Experience = {
   period: string;
   company: string;
@@ -16,6 +24,7 @@ export type Experience = {
   summary: string;
   stack: string[];
   current?: boolean;
+  subItems?: ExperienceSubItem[];
 };
 
 export type Project = {
