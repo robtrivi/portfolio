@@ -5,28 +5,26 @@ export const projects = {
   command: "ls ./proyectos",
   items: [
     {
-      id: "Proyecto_01",
-      title: "Herramienta de Ingeniería Universitaria",
+      id: "Poliplanifica",
+      title: "Poliplanifica",
       description:
-        "Software desarrollado de forma autónoma para optimizar procesos académicos. Una herramienta de uso real que nació en la universidad y que aplico para resolver problemas estructurales en el desarrollo.",
-      image:
-        "https://lh3.googleusercontent.com/aida-public/AB6AXuBPbz-H1s5LP61gV7IDYc6hX5JOUaGcQptmN0F3eQyvLwvajjrsBUuvC3mxumnEM_07tQzwp6mB6DQsPZgLzuGUJf68ZeA_XjW8yuBiLzH2aS6tD1_uN89S7GnMjxKPid_85Zus5vMkLp1zwc4npb6wzZ-3UAY3se7CyhKmoKpZABZWY03zTs9c-sACqF6ha7eXRQ886kZfWjQynbf9xFdxesEiOz6w_pzIxveXc_G53Y8k3YSTfttCEFJyYA7HQDQUk4Y6xKp4mkk",
-      imageAlt: "Dashboard de Herramienta Académica",
+        "Extensión de navegador que integra un botón dinámico en el sistema oficial de la universidad para generar y visualizar horarios de forma interactiva mientras se seleccionan materias.",
+      image: "/src/assets/images/poliplanifica.webp",
+      imageAlt: "Dashboard de Poliplanifica",
       href: "#contact",
       cta: "Ver detalles del proyecto",
-      stack: ["Python", "SQLite", "Qt"],
+      stack: ["JavaScript", "Browser Extensions", "DOM Manipulation"],
     },
     {
-      id: "Proyecto_02",
-      title: "Orquestador de Datos en Tiempo Real",
+      id: "Polirecomienda",
+      title: "Polirecomienda",
       description:
-        "Diseño y liderazgo del desarrollo de un pipeline de datos distribuido. Enfocado en la fiabilidad de los procesos y la observabilidad del sistema completo.",
-      image:
-        "https://lh3.googleusercontent.com/aida-public/AB6AXuBa6loZtoFFdkiI6lZwl6cCPID7pjqbkz2vRfz_9B5D3OMxlTFKb_3JHLwJZlwZigVIbN03JPaeo8nNqpQ26dY8RiNpTry0SoUJaR9YDwOgOeRoCe4QdhaVr9CksWzbvN3RjguZm1l4YA29jZ7XvibrJJuoTXac0VRaK65w2I-KWn0GZeeAYeAOFBxLO74oHPTR-G7I9kn_KWaoG5u8JGlN0G3NiYVEmAyGW-IPY3YZqriIZtssfijgbpJVVYmxxoDQbB_2NxsEiWY",
-      imageAlt: "Visualizador de pipeline de datos",
+        "Herramienta diseñada para visualizar y comparar la opinión de los estudiantes sobre los profesores, utilizando el sistema de puntajes oficial para facilitar la toma de decisiones.",
+      image: "/src/assets/images/polirecomienda.webp",
+      imageAlt: "Visualizador de Polirecomienda",
       href: "#contact",
       cta: "Ver detalles del proyecto",
-      stack: ["Go", "Kafka", "PostgreSQL"],
+      stack: ["Python", "Web Scraping", "Data Visualization"],
     },
   ] satisfies Project[],
 } as const;
