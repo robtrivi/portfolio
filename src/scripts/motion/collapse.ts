@@ -78,7 +78,10 @@ const closeCollapse = (details: HTMLDetailsElement, content: HTMLElement) => {
   });
 };
 
-const syncInitialState = (details: HTMLDetailsElement, content: HTMLElement) => {
+const syncInitialState = (
+  details: HTMLDetailsElement,
+  content: HTMLElement,
+) => {
   if (details.open) {
     content.style.opacity = "1";
     content.style.transform = "translateY(0px)";
@@ -97,7 +100,10 @@ document
     const summary = details.querySelector("summary");
     const content = getContent(details);
 
-    if (!(summary instanceof HTMLElement) || !(content instanceof HTMLElement)) {
+    if (
+      !(summary instanceof HTMLElement) ||
+      !(content instanceof HTMLElement)
+    ) {
       return;
     }
 
