@@ -1,3 +1,5 @@
+import type { ImageMetadata } from "astro";
+
 export type Availability = {
   label: string;
   value: string;
@@ -31,7 +33,7 @@ export type Project = {
   id: string;
   title: string;
   description: string;
-  image: string;
+  image: ImageMetadata;
   imageAlt: string;
   href: string;
   cta: string;

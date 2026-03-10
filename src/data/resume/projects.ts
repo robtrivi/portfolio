@@ -1,4 +1,6 @@
 import type { Project } from "./types";
+import poliplanificaImg from "@assets/images/poliplanifica.png";
+import polirecomiendaImg from "@assets/images/polirecomienda.png";
 
 export const projects = {
   id: "projects",
@@ -9,9 +11,9 @@ export const projects = {
       title: "Poliplanifica",
       description:
         "Extensión de navegador que integra un botón dinámico en el sistema oficial de la universidad para generar y visualizar horarios de forma interactiva mientras se seleccionan materias.",
-      image: "/src/assets/images/poliplanifica.webp",
+      image: poliplanificaImg,
       imageAlt: "Dashboard de Poliplanifica",
-      href: "#contact",
+      href: "https://cancebit.com/blog/origen-de-poliplanifica-automatizacion/",
       cta: "Ver detalles del proyecto",
       stack: ["JavaScript", "Browser Extensions", "DOM Manipulation"],
     },
@@ -20,10 +22,10 @@ export const projects = {
       title: "Polirecomienda",
       description:
         "Herramienta diseñada para visualizar y comparar la opinión de los estudiantes sobre los profesores, utilizando el sistema de puntajes oficial para facilitar la toma de decisiones.",
-      image: "/src/assets/images/polirecomienda.webp",
+      image: polirecomiendaImg,
       imageAlt: "Visualizador de Polirecomienda",
-      href: "#contact",
-      cta: "Ver detalles del proyecto",
+      href: "https://polirecomienda.robtrivi.com/",
+      cta: "Ver proyecto",
       stack: ["Python", "Web Scraping", "Data Visualization"],
     },
   ] satisfies Project[],
