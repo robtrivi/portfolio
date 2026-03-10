@@ -1,0 +1,23 @@
+---
+interface Props {
+  left: readonly string[];
+  right: string;
+}
+
+const { left, right } = Astro.props;
+---
+
+<footer class="border-t border-white/10 bg-black/70">
+  <div
+    class="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-4 text-[9px] font-bold tracking-[0.24em] text-secondary uppercase md:flex-row md:items-center md:justify-between md:px-8"
+  >
+    <div class="flex flex-wrap gap-4 md:gap-6">
+      {left.map((item) => <span>{item}</span>)}
+    </div>
+
+    <div class="flex items-center gap-2">
+      <span>{right}</span>
+      <span class="h-1.5 w-1.5 rounded-full bg-green-500"></span>
+    </div>
+  </div>
+</footer>

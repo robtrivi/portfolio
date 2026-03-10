@@ -1,0 +1,13 @@
+---
+interface Props {
+  command: string;
+  anchorId?: string;
+}
+
+const { command, anchorId } = Astro.props;
+---
+
+<div id={anchorId} class="flex scroll-mt-28 items-center gap-2">
+  <p class="prompt text-sm font-bold text-primary md:text-base">{command}</p>
+  <slot />
+</div>

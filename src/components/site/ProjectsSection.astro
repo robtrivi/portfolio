@@ -1,0 +1,19 @@
+---
+import type { Project } from "../../data/resume";
+import TerminalSection from "../ui/TerminalSection.astro";
+import ProjectCard from "./ProjectCard.astro";
+
+interface Props {
+  id: string;
+  command: string;
+  items: readonly Project[];
+}
+
+const { id, command, items } = Astro.props;
+---
+
+<TerminalSection command={command} anchorId={id} class="mb-14 md:mb-20">
+  <div class="grid gap-6 md:grid-cols-2">
+    {items.map((project) => <ProjectCard project={project} />)}
+  </div>
+</TerminalSection>

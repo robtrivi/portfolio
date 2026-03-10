@@ -1,0 +1,25 @@
+---
+import type { Experience } from "../../data/resume";
+import TerminalSection from "../ui/TerminalSection.astro";
+import TimelineItem from "./TimelineItem.astro";
+
+interface Props {
+  id: string;
+  command: string;
+  title: string;
+  items: readonly Experience[];
+}
+
+const { id, command, title, items } = Astro.props;
+---
+
+<TerminalSection command={command} anchorId={id} class="mb-14 md:mb-16">
+  <div class="space-y-10">
+    <p class="text-xs font-bold tracking-[0.26em] text-primary uppercase">
+      {title}
+    </p>
+    <div class="space-y-12">
+      {items.map((item) => <TimelineItem item={item} />)}
+    </div>
+  </div>
+</TerminalSection>

@@ -1,0 +1,53 @@
+---
+import type { Availability } from "../../data/resume";
+import StatusPill from "../ui/StatusPill.astro";
+import TerminalSection from "../ui/TerminalSection.astro";
+
+interface Props {
+  command: string;
+  logs: readonly string[];
+  firstName: string;
+  lastName: string;
+  role: string;
+  summary: string;
+  availability: readonly Availability[];
+}
+
+const { command, logs, firstName, lastName, role, summary, availability } =
+  Astro.props;
+---
+
+<TerminalSection command={command} class="mb-14 md:mb-16">
+  <div class="border-l-2 border-white/5 pl-6">
+    <div class="space-y-2 text-sm text-secondary">
+      {logs.map((line) => <p>{line}</p>)}
+    </div>
+
+    <div class="mt-6 max-w-3xl">
+      <p class="font-sans text-[11px] tracking-[0.32em] text-primary uppercase">
+        Resume / CV
+      </p>
+      <h1
+        class="mt-4 text-4xl leading-none font-bold tracking-tight text-white uppercase sm:text-5xl md:text-7xl"
+      >
+        {firstName}
+        <br />
+        {lastName}
+      </h1>
+      <p class="mt-6 text-xl font-bold text-primary md:text-2xl">{role}</p>
+      <p
+        class="mt-4 max-w-2xl font-sans text-base leading-relaxed text-secondary"
+      >
+        {summary}
+      </p>
+    </div>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      {
+        availability.map((item) => (
+          <StatusPill label={item.label} value={item.value} />
+        ))
+      }
+    </div>
+  </div>
+</TerminalSection>

@@ -1,0 +1,42 @@
+---
+import type { SocialLink } from "../../data/resume";
+import PromptLine from "../ui/PromptLine.astro";
+import ContactLink from "./ContactLink.astro";
+
+interface Props {
+  id: string;
+  command: string;
+  email: string;
+  socials: readonly SocialLink[];
+}
+
+const { id, command, email, socials } = Astro.props;
+---
+
+<section class="mb-20 scroll-mt-28" id={id}>
+  <PromptLine command={command}>
+    <span class="h-5 w-2 animate-[pulse_1s_infinite] bg-primary"></span>
+  </PromptLine>
+
+  <div
+    class="mt-6 flex flex-col justify-between gap-8 border-t border-white/10 pt-8 md:flex-row"
+  >
+    <div>
+      <p
+        class="mb-2 text-[10px] font-bold tracking-[0.22em] text-secondary uppercase"
+      >
+        Canal de comunicacion
+      </p>
+      <a
+        class="text-2xl font-bold text-white uppercase transition hover:text-primary"
+        href={`mailto:${email}`}
+      >
+        {email}
+      </a>
+    </div>
+
+    <div class="flex flex-wrap gap-10">
+      {socials.map((item) => <ContactLink item={item} />)}
+    </div>
+  </div>
+</section>

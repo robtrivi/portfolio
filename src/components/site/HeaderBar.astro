@@ -1,0 +1,60 @@
+---
+import WindowDots from "../ui/WindowDots.astro";
+
+interface NavItem {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  session: string;
+  status: string;
+  timezone: string;
+  nav: readonly NavItem[];
+}
+
+const { session, status, timezone, nav } = Astro.props;
+---
+
+<header
+  class="sticky top-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur-xl"
+>
+  <div
+    class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-4 md:px-8"
+  >
+    <div class="flex items-center gap-4">
+      <WindowDots />
+      <span
+        class="text-[10px] font-bold tracking-[0.28em] text-secondary uppercase"
+      >
+        session: {session}
+      </span>
+    </div>
+
+    <nav
+      class="order-3 w-full overflow-x-auto md:order-2 md:w-auto"
+      aria-label="Principal"
+    >
+      <ul
+        class="flex min-w-max items-center gap-5 font-sans text-[11px] tracking-[0.2em] text-secondary uppercase"
+      >
+        {
+          nav.map((item) => (
+            <li>
+              <a class="transition hover:text-primary" href={item.href}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div
+      class="flex items-center gap-4 text-[10px] font-bold tracking-[0.24em] uppercase"
+    >
+      <span class="animate-pulse text-primary">{status}</span>
+      <span class="text-secondary">{timezone}</span>
+    </div>
+  </div>
+</header>

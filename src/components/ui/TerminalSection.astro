@@ -1,0 +1,18 @@
+---
+import PromptLine from "./PromptLine.astro";
+
+interface Props {
+  command: string;
+  anchorId?: string;
+  class?: string;
+}
+
+const { command, anchorId, class: className } = Astro.props;
+---
+
+<section class:list={["space-y-4", className]}>
+  <PromptLine command={command} anchorId={anchorId} />
+  <div class="space-y-6">
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,36 @@
+---
+import type { Experience } from "../../data/resume";
+import StackTags from "../ui/StackTags.astro";
+
+interface Props {
+  item: Experience;
+}
+
+const { item } = Astro.props;
+---
+
+<article class="relative border-l border-white/20 pl-8">
+  <span
+    class:list={[
+      "absolute top-0 -left-1.25 h-2.5 w-2.5 rounded-full",
+      item.current ? "bg-primary" : "bg-white/40",
+    ]}></span>
+  <div class="space-y-3">
+    <div>
+      <p
+        class="text-[10px] font-bold tracking-[0.22em] text-secondary uppercase"
+      >
+        {item.period} // {item.company}
+      </p>
+      <h3 class="mt-2 text-xl font-bold text-white uppercase">{item.role}</h3>
+    </div>
+
+    <p
+      class="max-w-3xl font-sans text-sm leading-relaxed text-secondary md:text-base"
+    >
+      {item.summary}
+    </p>
+
+    <StackTags items={item.stack} compact />
+  </div>
+</article>

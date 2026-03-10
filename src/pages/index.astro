@@ -1,17 +1,65 @@
 ---
-
+import ContactSection from "../components/site/ContactSection.astro";
+import ExperienceSection from "../components/site/ExperienceSection.astro";
+import FooterBar from "../components/site/FooterBar.astro";
+import HeaderBar from "../components/site/HeaderBar.astro";
+import HeroSection from "../components/site/HeroSection.astro";
+import ProjectsSection from "../components/site/ProjectsSection.astro";
+import SkillsSection from "../components/site/SkillsSection.astro";
+import { resume } from "../data/resume";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title={resume.seo.title} description={resume.seo.description}>
+  <div class="grid-bg min-h-screen">
+    <HeaderBar
+      session={resume.header.session}
+      status={resume.header.status}
+      timezone={resume.header.timezone}
+      nav={resume.header.nav}
+    />
+
+    <main
+      class="terminal-scroll mx-auto w-full max-w-6xl px-6 py-8 md:px-8 md:py-12"
+    >
+      <HeroSection
+        command={resume.hero.command}
+        logs={resume.hero.logs}
+        firstName={resume.hero.firstName}
+        lastName={resume.hero.lastName}
+        role={resume.hero.role}
+        summary={resume.hero.summary}
+        availability={resume.hero.availability}
+      />
+
+      <SkillsSection
+        id={resume.skills.id}
+        command={resume.skills.command}
+        title={resume.skills.title}
+        groups={resume.skills.groups}
+      />
+
+      <ExperienceSection
+        id={resume.experience.id}
+        command={resume.experience.command}
+        title={resume.experience.title}
+        items={resume.experience.items}
+      />
+
+      <ProjectsSection
+        id={resume.projects.id}
+        command={resume.projects.command}
+        items={resume.projects.items}
+      />
+
+      <ContactSection
+        id={resume.contact.id}
+        command={resume.contact.command}
+        email={resume.contact.email}
+        socials={resume.contact.socials}
+      />
+    </main>
+
+    <FooterBar left={resume.footer.left} right={resume.footer.right} />
+  </div>
+</BaseLayout>

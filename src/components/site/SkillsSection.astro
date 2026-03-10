@@ -1,0 +1,38 @@
+---
+import type { SkillGroup } from "../../data/resume";
+import TerminalSection from "../ui/TerminalSection.astro";
+
+interface Props {
+  id: string;
+  command: string;
+  title: string;
+  groups: readonly SkillGroup[];
+}
+
+const { id, command, title, groups } = Astro.props;
+---
+
+<TerminalSection command={command} anchorId={id} class="mb-14 md:mb-16">
+  <div class="border border-white/10 bg-white/5 p-6 md:p-8">
+    <p class="mb-6 text-xs font-bold tracking-[0.26em] text-primary uppercase">
+      {title}
+    </p>
+
+    <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
+      {
+        groups.map((group) => (
+          <article>
+            <p class="mb-4 border-b border-primary/30 pb-2 text-[10px] font-bold tracking-[0.24em] text-white uppercase">
+              {group.id}_{group.title}
+            </p>
+            <ul class="space-y-2 font-sans text-sm text-secondary">
+              {group.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</TerminalSection>
