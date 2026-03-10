@@ -1,4 +1,4 @@
-name: Deploy Curriculum
+name: Deploy Portfolio
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: deploy-curriculum-production
+  group: deploy-portfolio-production
   cancel-in-progress: true
 
 permissions:
