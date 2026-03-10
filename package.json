@@ -18,7 +18,8 @@
     "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
-    "@iconify-json/material-symbols": "^1.2.61",
+    "@iconify-json/lucide": "^1.2.96",
+    "@iconify-json/simple-icons": "^1.2.73",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
