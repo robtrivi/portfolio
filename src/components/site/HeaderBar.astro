@@ -19,9 +19,80 @@ const { session, status, timezone, nav } = Astro.props;
 <header
   class="sticky top-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur-xl"
 >
-  <div
-    class="flex flex-wrap items-center justify-between gap-4 px-4 py-2 md:px-6"
-  >
+  <details class="group md:hidden" data-motion-collapse>
+    <summary
+      class="flex cursor-pointer list-none items-center justify-between px-4 py-3"
+    >
+      <div class="flex items-center gap-4">
+        <WindowDots />
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span
+          class="text-[10px] font-bold tracking-[0.2em] text-secondary uppercase"
+        >
+          Menu
+        </span>
+        <svg
+          class="h-4 w-4 text-secondary transition-transform duration-300 group-open:rotate-180"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m6 9 6 6 6-6"></path>
+        </svg>
+      </div>
+    </summary>
+
+    <div data-collapse-content>
+      <nav class="border-t border-white/5 px-4 py-8" aria-label="Mobile">
+        <ul
+          class="flex flex-col gap-6 text-[11px] font-bold tracking-[0.25em] text-secondary uppercase"
+        >
+          {
+            nav.map((item) => (
+              <li>
+                <a
+                  class="block transition hover:text-primary"
+                  href={item.href}
+                  aria-label={item.label}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="mt-10 flex flex-col gap-4 border-t border-white/5 pt-8">
+          <div class="flex items-center justify-between">
+            <span class="text-[9px] tracking-[0.2em] text-white/30 uppercase">
+              session
+            </span>
+            <span class="text-[9px] tracking-[0.2em] text-secondary uppercase">
+              {session}
+            </span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-[9px] tracking-[0.2em] text-white/30 uppercase">
+              status
+            </span>
+            <span
+              class="animate-pulse text-[9px] font-bold tracking-[0.2em] text-primary uppercase"
+            >
+              {status}
+            </span>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </details>
+
+  <div class="hidden items-center justify-between gap-4 px-6 py-2 md:flex">
     <div class="flex items-center gap-4">
       <WindowDots />
       <span
@@ -31,17 +102,18 @@ const { session, status, timezone, nav } = Astro.props;
       </span>
     </div>
 
-    <nav
-      class="order-3 w-full overflow-x-auto md:order-2 md:w-auto"
-      aria-label="Principal"
-    >
+    <nav aria-label="Principal">
       <ul
-        class="flex min-w-max items-center gap-5 font-sans text-[11px] tracking-[0.2em] text-secondary uppercase"
+        class="flex items-center gap-5 font-sans text-[11px] tracking-[0.2em] text-secondary uppercase"
       >
         {
           nav.map((item) => (
             <li>
-              <a class="transition hover:text-primary" href={item.href}>
+              <a
+                class="transition hover:text-primary"
+                href={item.href}
+                aria-label={item.label}
+              >
                 {item.label}
               </a>
             </li>
