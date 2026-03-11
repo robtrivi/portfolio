@@ -14,8 +14,8 @@ importers:
         specifier: ^4.2.1
         version: 4.2.1(vite@7.3.1(jiti@2.6.1)(lightningcss@1.31.1)(yaml@2.8.2))
       astro:
-        specifier: ^6.0.1
-        version: 6.0.1(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)
+        specifier: ^6.0.2
+        version: 6.0.2(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)
       motion:
         specifier: ^12.35.2
         version: 12.35.2
@@ -1324,10 +1324,10 @@ packages:
         integrity: sha512-I1jXZMjAgCMmxT4qxXfPXa6SthSoE8h6gkSI9BGGNv8mP8G/v0blc+qFnZu6K42vTOiuME596QaLO0TP3Lk0xg==,
       }
 
-  astro@6.0.1:
+  astro@6.0.2:
     resolution:
       {
-        integrity: sha512-G6AGlYMYlRmOq8kh3wKcVwwvGwNias6wZuD1n9qmhdOKR3W3sgi/L7bq5VPaN1GS1MMygBTdUYzsOFGeGTaFPQ==,
+        integrity: sha512-aYCU9QcaV3QlOxO+JU2lR4xazVuPaH7oFhc990H/fhbWLMm1MWlRnjfnti1gYMm9N9l7gqPb3t7JsQBlUEQXIg==,
       }
     engines: { node: ^20.19.1 || >=22.12.0, npm: ">=9.6.5", pnpm: ">=7.1.0" }
     hasBin: true
@@ -4170,7 +4170,7 @@ snapshots:
 
   array-iterate@2.0.1: {}
 
-  astro@6.0.1(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2):
+  astro@6.0.2(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2):
     dependencies:
       "@astrojs/compiler": 3.0.0
       "@astrojs/internal-helpers": 0.8.0
