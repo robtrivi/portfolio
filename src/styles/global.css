@@ -28,6 +28,10 @@
   button {
     cursor: pointer;
   }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
 }
 
 @layer utilities {

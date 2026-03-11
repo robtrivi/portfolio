@@ -66,8 +66,11 @@ const { item, isOpen = false } = Astro.props;
                 <div class="absolute top-1.5 -left-4.25 h-px w-3 bg-white/20 md:-left-6.25 md:w-5" />
                 <div class="space-y-2">
                   <div class="flex flex-wrap items-baseline gap-x-2">
-                    <h4 class="text-sm font-bold tracking-wider text-primary uppercase">
-                      ↳ {sub.client}
+                    <h4
+                      class="text-sm font-bold tracking-wider text-primary uppercase"
+                      aria-label={`Cliente: ${sub.client}`}
+                    >
+                      <span aria-hidden="true">↳</span> {sub.client}
                     </h4>
                     <span class="text-white/40">—</span>
                     <span class="text-[11px] font-bold tracking-widest text-secondary uppercase">
