@@ -7,14 +7,19 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+const faviconVersion = "2";
 ---
 
 <!doctype html>
 <html lang="es" class="bg-background">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href={`/favicon.svg?v=${faviconVersion}`}
+    />
+    <link rel="icon" href={`/favicon.ico?v=${faviconVersion}`} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
